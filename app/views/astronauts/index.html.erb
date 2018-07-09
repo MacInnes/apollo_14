@@ -10,4 +10,6 @@
   <% astronaut.space_missions.each do |mission| %>
     <p> <%= mission.title %> </p>
   <% end %>
+  <p>Total time in space: <%= astronaut.space_missions.sum(:trip_length) %> hours</p>
+  <!-- how do I do ^ that in the model or controller?  or is this why Dione owes me pizza? -->
 <% end %>

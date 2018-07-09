@@ -5,9 +5,9 @@ describe 'user visits /astronauts page' do
     @astronaut_1 = Astronaut.create(name: 'Neil Armstrong', age: 37, job: 'Commander')
     @astronaut_2 = Astronaut.create(name: 'Jim Lovell', age: 39, job: 'something')
 
-    @mission_1 = @astronaut_1.space_missions.create(title: "Apollo 14", trip_length: 123)
-    @mission_2 = @astronaut_1.space_missions.create(title: "Capollo 7", trip_length: 123)
-    @mission_3 = @astronaut_1.space_missions.create(title: "Bapollo 5", trip_length: 123)
+    @mission_1 = @astronaut_1.space_missions.create(title: "Apollo 14", trip_length: 100)
+    @mission_2 = @astronaut_1.space_missions.create(title: "Capollo 7", trip_length: 100)
+    @mission_3 = @astronaut_1.space_missions.create(title: "Bapollo 5", trip_length: 100)
   end
 
   it 'sees a list of all astonauts with name, age, and job' do
@@ -28,6 +28,14 @@ describe 'user visits /astronauts page' do
     visit '/astronauts'
 
     expect(page).to have_content("Space Missions:\n#{@mission_1.title}\n#{@mission_2.title}\n#{@mission_3.title}")
+  end
+
+  it 'shows the total time in space for each astronaut' do
+    visit '/astronauts'
+
+    expected = @mission_1.trip_length + @mission_2.trip_length + @mission_3.trip_length
+
+    expect(page).to have_content("Total time in space: #{expected} hours")
   end
 
 end

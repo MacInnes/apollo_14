@@ -5,5 +5,6 @@ class AstronautsController < ApplicationController
     @astronauts.each do |astronaut|
       astronaut.space_missions.order(:title)
     end
+
   end
 end
